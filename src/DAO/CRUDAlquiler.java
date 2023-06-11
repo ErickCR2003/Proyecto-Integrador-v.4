@@ -228,7 +228,7 @@ public class CRUDAlquiler extends ConectarBD {
 //            this.cerrarconexion();
 //        } 
 //    }
-//    
+
     public int ConsultarCantidadDeFacturas() {
         int cantidad = 0; //Vacio
         try {
