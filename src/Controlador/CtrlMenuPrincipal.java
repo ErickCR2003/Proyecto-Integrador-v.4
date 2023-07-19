@@ -5,6 +5,7 @@ import Vst.Tipo.VstTipo_Lista;
 import Formatos.Mensajes;
 import Principal.Main;
 import Vst.Alquiler.VstAlquiler_Lista;
+import Vst.Alquiler.VstAlquiler_Devolver;
 import Vst.Cliente.VstCliente_Lista;
 import Vst.Herramienta.VstHerramienta_Lista;
 import Vst.Reporte.VstReportes;
@@ -17,7 +18,7 @@ public class CtrlMenuPrincipal implements ActionListener {
     
     //--- Alquiler ------------------------------------------------------------------------------------
     public static Vst.Alquiler.VstAlquiler_Lista VAlq_Lista = new VstAlquiler_Lista();
-    public static CtrlAlquiler_Lista CAlq_Lista = new CtrlAlquiler_Lista(VAlq_Lista);     
+    public static CtrlAlquiler_Lista CAlq_Lista = new CtrlAlquiler_Lista(VAlq_Lista);        
     
     //--- Herramienta ----------------------------------------------------------------------------------
     public static Vst.Herramienta.VstHerramienta_Lista VHerr_Lista = new VstHerramienta_Lista();
@@ -127,5 +128,7 @@ public class CtrlMenuPrincipal implements ActionListener {
             }
         }    
       
-    }    
+    } 
+    
+    
 }

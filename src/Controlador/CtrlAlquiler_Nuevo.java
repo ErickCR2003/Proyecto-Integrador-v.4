@@ -54,6 +54,7 @@ public class CtrlAlquiler_Nuevo implements ActionListener {
         vista.btnActualizaTipos.addActionListener(this);
         vista.btnActualizaTipos.addActionListener(this);
         vista.setVisible(true);
+        vista.setLocationRelativeTo(null);
 
         int cantidad = cruda.ConsultarCantidadDeFacturas() + 1;
         vista.jtxtNumAlquiler.setText("N° " + cantidad);

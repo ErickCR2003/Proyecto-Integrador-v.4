@@ -4,10 +4,9 @@ import DAO.*;
 import Formatos.Mensajes;
 import Modelo.Alquiler;
 import Vst.Alquiler.VstAlquiler;
+import Vst.Alquiler.VstAlquiler_Editar;
+import Vst.Alquiler.VstAlquiler_Devolver;
 import Vst.Alquiler.VstAlquiler_Lista;
-import Vst.Herramienta.VstHerramienta_Lista;
-import Vst.Herramienta.VstHerramienta;
-import Vst.Herramienta.VstHerramienta_Editar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,13 +16,17 @@ public class CtrlAlquiler_Lista implements ActionListener {
     CRUDAlquiler cruda;
     CRUDtipos crudt;
     VstAlquiler_Lista VstAlq_Lst;
-    int idHerramientaEnTabla = 0;
+    int idAlquilerEnTabla = 0;
 
     public static Vst.Alquiler.VstAlquiler VAql;
     public static CtrlAlquiler_Nuevo CAlq_Nvo;
-
-    //public static Vst.Herramienta.VstHerramienta_Editar VHerr_Editar; //se usa la misma VstAlq_Lst de nuevo
-    public static CtrlAlquiler_Editar CAlq_Editar;
+        
+    public static VstAlquiler_Editar VAql_Ed;
+    public static CtrlAlquiler_Editar CAlq_Ed;
+    
+    public static VstAlquiler_Devolver VAql_Dev;
+    public static CtrlAlquiler_Devolver  CAlq_Dev;
+    
 
     public CtrlAlquiler_Lista(VstAlquiler_Lista XVAlq) {
         VstAlq_Lst = XVAlq;
@@ -40,9 +43,10 @@ public class CtrlAlquiler_Lista implements ActionListener {
         VstAlq_Lst.tblAlquileres.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jtblTablaDeHerramientasMouseClicked(evt);
+                jtblTablaDeAlquileresMouseClicked(evt);
             }
-        });
+        });  
+        
     }
 
     private void CargarTablaAlquileres() {
@@ -51,31 +55,17 @@ public class CtrlAlquiler_Lista implements ActionListener {
         VstAlq_Lst.setVisible(true);
     }
 
-    private void jtblTablaDeHerramientasMouseClicked(java.awt.event.MouseEvent evt) {
+    private void jtblTablaDeAlquileresMouseClicked(java.awt.event.MouseEvent evt) {
         //indice de la fila
         int indiceDeFila = VstAlq_Lst.tblAlquileres.getSelectedRow();
         //obtengo el valor del ID que está en la columna 0 de la fila
-        idHerramientaEnTabla = (int) VstAlq_Lst.tblAlquileres.getValueAt(indiceDeFila, 0);
+        idAlquilerEnTabla = (int) VstAlq_Lst.tblAlquileres.getValueAt(indiceDeFila, 0);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        // REGISTRAR DEVOLUCION  ---------------------------------------------------------------------------------
-        if (e.getSource() == VstAlq_Lst.btnAlquiler_Devolucion) {
-//            alq = cruda.ConsultarRegistroHerramienta(idHerramientaEnTabla);
-//            if (alq == null) {
-//                Mensajes.M1("El ID " + idHerramientaEnTabla + " no existe en la tabla Herramienta.");
-//            } else {
-//                Mensajes.M1("ID Herramienta:           " + alq.getID()
-//                        + "<br>Nombre:         " + alq.getNombre()
-//                        + "<br>Nro.Serie:      " + alq.getNroSerie()
-//                        + "<br>Precio:         " + alq.getImp_PrecioAlquiler());
-//            }
-        }
-        //------------------------------------------------------------------------------------------------------
-        
+                
         
         // ACTUALIZAR LISTA -------------------------------------------------------------------------------------
         if (e.getSource() == VstAlq_Lst.jbtnReiniciar) {
@@ -104,5 +94,27 @@ public class CtrlAlquiler_Lista implements ActionListener {
             }
         }
         //--------------------------------------------------------------------------------------------------------
+        
+        
+        // DEVOLVER ALQUILER ---------------------------------------------------------------------------------------
+        if (e.getSource() == VstAlq_Lst.btnAlquiler_Devolucion) {
+            
+            alq = cruda.ConsultarRegistroAlquiler(idAlquilerEnTabla);
+            
+            if (alq == null) {
+                Mensajes.M1("El ID " + idAlquilerEnTabla + " no existe en la tabla alquileres.");
+            } else {
+                VAql_Dev = new VstAlquiler_Devolver();
+                CAlq_Dev = new CtrlAlquiler_Devolver(VAql_Dev); 
+                CAlq_Dev.CargarAlquiler(alq);
+                
+                CargarTablaAlquileres();
+            }
+        }
+        //------------------------------------------------------------------------------------------------------
+        
+        
+        
+        
     }
 }

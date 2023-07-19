@@ -2,7 +2,6 @@ package Controlador;
 
 import DAO.CRUDherramientas;
 import DAO.CRUDtipos;
-import Formatos.FormatoHerramienta;
 import Formatos.Mensajes;
 import Modelo.Herramienta;
 import Vst.Herramienta.VstHerramienta_Editar;
@@ -25,7 +24,7 @@ public class CtrlHerramienta_Editar implements ActionListener {
         crudh = new CRUDherramientas();
         vista.btnGuardar.addActionListener(this);
         vista.btnCancelar.addActionListener(this);
-        vista.btnLimpiarDatos.addActionListener(this);
+        vista.btnLimpiarDatos.addActionListener(this);  
         vista.setVisible(true);
         vista.setLocationRelativeTo(null);
 

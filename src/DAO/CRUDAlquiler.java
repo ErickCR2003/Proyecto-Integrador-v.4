@@ -27,6 +27,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,6 +48,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class CRUDAlquiler extends ConectarBD {
 
+    
+    private CRUDclientes CRUDc;
+    
     public CRUDAlquiler() {
     }
 
@@ -362,6 +367,56 @@ public class CRUDAlquiler extends ConectarBD {
 //        }
 //        return fact;
 //    }
+    
+    
+     public Alquiler ConsultarRegistroAlquiler(int Xid) {
+        Alquiler alq = null; //Vacio
+        try {
+            this.obtenerconexion();
+            rs = st.executeQuery("SELECT ID, fecHoraCreacion, diasAlquiler, fecHoraSalida, fecHoraRetorno, imp_Total, imp_Garantia, imp_Traslado, idEmpleado, idCliente, "
+                    + " estado, conTraslado, direccionEntrega, SerieFacBol, NroFacBol, serieCorrFacBol FROM alquiler WHERE ID = " + Xid);
+            if (rs.next()) {//Si tiene registro la consulta
+                alq = new Alquiler();
+                alq.setID(rs.getInt(1));
+                alq.setFecHoraCreacion(LocalDate.parse(rs.getString(2)));
+                alq.setDiasAlquiler(rs.getInt(3));
+                
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                
+                String fechaHoraSal = rs.getString(4);
+                LocalDateTime fechaHoraSalida = LocalDateTime.parse(fechaHoraSal, formatter);                
+                alq.setFecHoraSalida(fechaHoraSalida); 
+                
+                String fechaHoraRet = rs.getString(5);                
+                LocalDateTime fechaHoraRetorno = LocalDateTime.parse(fechaHoraRet, formatter);                
+                alq.setFecHoraRetorno(fechaHoraRetorno);    
+                               
+                alq.setImp_Total(rs.getDouble(6));
+                alq.setImp_Garantia(rs.getDouble(7));
+                alq.setImp_Traslado(rs.getDouble(8));
+                alq.setIdEmpleado(rs.getInt(9));
+                alq.setIdCliente(rs.getInt(10));
+                alq.setEstado(rs.getString(11));
+                alq.setConTraslado(rs.getBoolean(12));
+                alq.setDireccionEntrega(rs.getString(13));
+                alq.setSerieFacBol(rs.getString(14));
+                alq.setNroFacBol(rs.getInt(15));
+                alq.setSerieCorrFacBol(rs.getString(16));
+                
+                //convirtiendo los Id en objetos
+                Cliente cli = new Cliente();
+                CRUDc = new CRUDclientes();
+                cli = CRUDc.ConsultarRegistroCliente_Recibo(alq.getIdCliente());
+                alq.setCliente(cli);                
+            }           
+        } catch (Exception ex) {
+            Mensajes.M1("ERROR! No se puede recuperar el registro del empleado..." + ex);
+        } finally {
+            this.cerrarconexion();
+        }
+        return alq;
+    }
+    
     
     public void ImprimirPDF(int numrecibo, String fecha,String dniCliente,String nomCliente,String hora, String vendedor,double descuento,int cantProductos,double subtotal,double igv, double totalGeneral, List lista) {
         try {
