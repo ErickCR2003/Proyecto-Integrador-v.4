@@ -13,9 +13,9 @@ import java.util.Date;
 public class Reporte {
     private int codAlquiler;
     private Date fechaCreacion;
-    private int codHerramienta;
-    private String nombreHerramienta;
-    private Double precioAlquiler;
+    private int diasAlquiler;
+    private Date fechaSalida;
+    private Date fechaRetorno;  
     private String nombreCliente;
     private Double importeTotal;
     private String estado;
@@ -34,31 +34,7 @@ public class Reporte {
 
     public void setFechaCreacion(Date fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
-    }
-
-    public int getCodHerramienta() {
-        return codHerramienta;
-    }
-
-    public void setCodHerramienta(int codHerramienta) {
-        this.codHerramienta = codHerramienta;
-    }
-
-    public String getNombreHerramienta() {
-        return nombreHerramienta;
-    }
-
-    public void setNombreHerramienta(String nombreHerramienta) {
-        this.nombreHerramienta = nombreHerramienta;
-    }
-
-    public Double getPrecioAlquiler() {
-        return precioAlquiler;
-    }
-
-    public void setPrecioAlquiler(Double precioAlquiler) {
-        this.precioAlquiler = precioAlquiler;
-    }
+    }   
 
     public String getNombreCliente() {
         return nombreCliente;
@@ -85,8 +61,34 @@ public class Reporte {
     }
     
     public Object [] RegistroReporte(int num){
-        Object[] fila = {codAlquiler,fechaCreacion,codHerramienta,nombreHerramienta,precioAlquiler,nombreCliente,importeTotal,estado};
+        Object[] fila = {codAlquiler,fechaCreacion,diasAlquiler,fechaSalida,fechaRetorno,nombreCliente,importeTotal,estado};
         return fila;
     } 
+
+    public int getDiasAlquiler() {
+        return diasAlquiler;
+    }
+
+    public void setDiasAlquiler(int diasAlquiler) {
+        this.diasAlquiler = diasAlquiler;
+    }
+
+    public Date getFechaSalida() {
+        return fechaSalida;
+    }
+
+    public void setFechaSalida(Date fechaSalida) {
+        this.fechaSalida = fechaSalida;
+    }
+
+    public Date getFechaRetorno() {
+        return fechaRetorno;
+    }
+
+    public void setFechaRetorno(Date fechaRetorno) {
+        this.fechaRetorno = fechaRetorno;
+    }
+    
+    
     
 }

@@ -18,6 +18,8 @@ public class Herramienta {
     private int idTipo;
     private TipoHerramienta Tipo;
     
+     private Double importeFinal;
+    
     public Herramienta() {
     }
     
@@ -50,6 +52,15 @@ public class Herramienta {
     public void setEstado(String estado)        {this.estado = estado;}    
     
     
+       public Double getImporteFinal() {
+        return importeFinal;
+    }
+
+    public void setImporteFinal(Double importeFinal) {
+        this.importeFinal = importeFinal;
+    }
+    
+    
     
     //Listados ----------------------------------------------------------------------   
     
@@ -67,4 +78,15 @@ public class Herramienta {
         Object[] fila = {her.ID, her.nroSerie, her.nombre, her.Tipo.getNombreTipo(), her.imp_ValorReferencial, her.peso,her.imp_PrecioAlquiler, her.nroAlquileres};
         return fila;
     } 
+    
+       public Object [] Reporte10Herramienta(int num){
+        Object[] fila = {ID, nombre,anioFabricacion,fecAdquisicion,peso,imp_PrecioAlquiler, nroAlquileres,estado,importeFinal};
+        return fila;
+    }
+    
+    public Object [] ReporteHerramientaNucaAlquiladas(int num){
+        Object[] fila = {ID, nombre,anioFabricacion,fecAdquisicion,peso,imp_PrecioAlquiler, nroAlquileres,estado};
+        return fila;
+    }
+    
 }

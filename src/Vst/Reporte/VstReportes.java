@@ -39,11 +39,6 @@ public class VstReportes extends javax.swing.JInternalFrame {
         jpnlPestañaAdministrarUsuarios = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabla_reporteOtros = new javax.swing.JTable();
-        btn_reporte2 = new javax.swing.JButton();
-        btn_reporte3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabla_reporteAlquiler = new javax.swing.JTable();
@@ -54,6 +49,16 @@ public class VstReportes extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         fecha_hasta = new com.toedter.calendar.JDateChooser();
         btn_reportePorFecha = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla_reporteOtros = new javax.swing.JTable();
+        btn_reporte2 = new javax.swing.JButton();
+        btn_reporte3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        fecha_desde1 = new com.toedter.calendar.JDateChooser();
+        jLabel5 = new javax.swing.JLabel();
+        fecha_hasta1 = new com.toedter.calendar.JDateChooser();
+        jLabel_descripcion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -83,33 +88,6 @@ public class VstReportes extends javax.swing.JInternalFrame {
         jTabbedPane2.setBackground(new java.awt.Color(27, 23, 51));
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
-
-        jPanel1.setBackground(new java.awt.Color(27, 23, 51));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tabla_reporteOtros.setBackground(new java.awt.Color(217, 217, 217));
-        tabla_reporteOtros.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(tabla_reporteOtros);
-
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 1040, 480));
-
-        btn_reporte2.setText("Mostrar las 10 herramientas que mas ingresos generaron ");
-        jPanel1.add(btn_reporte2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 380, 60));
-
-        btn_reporte3.setText("Mostrar herramientas que nunca se  alquilaron");
-        jPanel1.add(btn_reporte3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, 390, 60));
-
-        jTabbedPane2.addTab("Otros", null, jPanel1, "");
 
         jPanel3.setBackground(new java.awt.Color(27, 23, 51));
         jPanel3.setPreferredSize(new java.awt.Dimension(1060, 735));
@@ -156,9 +134,55 @@ public class VstReportes extends javax.swing.JInternalFrame {
         jPanel3.add(fecha_hasta, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 20, 180, 30));
 
         btn_reportePorFecha.setText("Generar reporte");
+        btn_reportePorFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_reportePorFechaActionPerformed(evt);
+            }
+        });
         jPanel3.add(btn_reportePorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 20, 140, 30));
 
         jTabbedPane2.addTab("Reporte de alquiler por fecha especificada", jPanel3);
+
+        jPanel1.setBackground(new java.awt.Color(27, 23, 51));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabla_reporteOtros.setBackground(new java.awt.Color(217, 217, 217));
+        tabla_reporteOtros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tabla_reporteOtros);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 1040, 200));
+
+        btn_reporte2.setText("Mostrar las 10 herramientas que mas ingresos generaron ");
+        jPanel1.add(btn_reporte2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 380, 60));
+
+        btn_reporte3.setText("Mostrar herramientas que nunca se  alquilaron");
+        jPanel1.add(btn_reporte3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 390, 60));
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Desde");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 40, -1, -1));
+        jPanel1.add(fecha_desde1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 30, 180, 30));
+
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Hasta");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, -1, -1));
+        jPanel1.add(fecha_hasta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, 180, 30));
+
+        jLabel_descripcion.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel_descripcion.setText("descripcion");
+        jPanel1.add(jLabel_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 630, -1));
+
+        jTabbedPane2.addTab("Otros", null, jPanel1, "");
 
         jpnlPestañaAdministrarUsuarios.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 1080, 670));
 
@@ -179,16 +203,25 @@ public class VstReportes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_reportePorFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reportePorFechaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_reportePorFechaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btn_reporte2;
     public javax.swing.JButton btn_reporte3;
     public javax.swing.JButton btn_reportePorFecha;
     public com.toedter.calendar.JDateChooser fecha_desde;
+    public com.toedter.calendar.JDateChooser fecha_desde1;
     public com.toedter.calendar.JDateChooser fecha_hasta;
+    public com.toedter.calendar.JDateChooser fecha_hasta1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     public javax.swing.JLabel jLabel8;
+    public javax.swing.JLabel jLabel_descripcion;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

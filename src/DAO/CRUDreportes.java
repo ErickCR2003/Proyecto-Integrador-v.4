@@ -26,43 +26,51 @@ import javax.swing.table.DefaultTableModel;
  * @author julis
  */
 public class CRUDreportes extends ConectarBD {
-        
+    //desde
+    SimpleDateFormat sdf1;
+    String ff1;
+    
+    //hasta
+    SimpleDateFormat sdf2;
+    String ff2;
+    
+    
      public void MostrarHerramientasAlquiladasPorFecha(JTable tabla,JDateChooser fechaDesde, 
              JDateChooser fechaHasta, JLabel cha, JLabel tr ){ 
          
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String fechaFormateada = sdf.format(fechaDesde.getDate());
+        sdf1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        ff1 = sdf1.format(fechaDesde.getDate());
         
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        String fechaFormateada2 = sdf2.format(fechaHasta.getDate());
+        sdf2  = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        ff2 = sdf2.format(fechaHasta.getDate());
          
-        String titulos[]={"Cod. alquiler","fecha creacion","cod. herramienta","Descripcion","Precio","Cliente","Importe total","estado"};
+        String titulos[]={"Cod.alquiler","fech creación","Dias de alquiler","fech salida","fech retorno","Cliente","Importe total","estado"};
         DefaultTableModel modelo = new DefaultTableModel(null, titulos);
         tabla.setModel(modelo);        
         
         int numeracion=0;
         double recaudacionTotal = 0;
-        try {
+        try { 
             this.obtenerconexion();            
-            String query = "SELECT a.ID,a.fecHoraCreacion,da.idHerramienta,h.nombre,h.imp_PrecioAlquiler,c.nombrecompleto,a.imp_Total,a.estado FROM alquiler a \n" +
+            String query = "SELECT a.ID,a.fecHoraCreacion,a.diasAlquiler,a.fecHoraSalida,a.fecHoraRetorno,c.nombrecompleto,a.imp_Total,a.estado FROM alquiler a \n" +
             "inner join detallesalquiler da on a.ID = da.ID\n" +
             "inner join herramienta h on h.ID = da.idHerramienta\n" +
             "inner join  cliente c on c.ID = a.idCliente\n" +
             "WHERE  fecHoraCreacion BETWEEN ? AND ?";
             
             ps = conexion.prepareStatement(query);
-            ps.setString(1,fechaFormateada);         
-            ps.setString(2, fechaFormateada2);
+            ps.setString(1,ff1);         
+            ps.setString(2, ff2);
             rs = ps.executeQuery();
             
         while(rs.next()){
             numeracion++;
             Reporte re = new Reporte();  
             re.setCodAlquiler( rs.getInt("ID"));
-            re.setFechaCreacion(rs.getDate("fecHoraCreacion"));
-            re.setCodHerramienta(rs.getInt("idHerramienta"));
-            re.setNombreHerramienta(rs.getString("nombre"));
-            re.setPrecioAlquiler(rs.getDouble("imp_PrecioAlquiler"));           
+            re.setFechaCreacion(rs.getDate("fecHoraCreacion"));            
+            re.setDiasAlquiler(rs.getInt("diasAlquiler"));
+            re.setFechaSalida(rs.getDate("fecHoraSalida"));
+            re.setFechaRetorno(rs.getDate("fecHoraRetorno"));             
             re.setNombreCliente(rs.getString("nombrecompleto"));
             re.setImporteTotal(rs.getDouble("imp_Total"));
             re.setEstado(rs.getString("estado"));         
@@ -86,41 +94,56 @@ public class CRUDreportes extends ConectarBD {
     
      
      
-     public void Mostrar10HerramientasAlquiladas(JTable tabla){         
-        String titulos[]={"Cod. alquiler","fecha creacion","cod. herramienta","Descripcion","Precio","Cliente","Importe total","estado"};
-        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-        tabla.setModel(modelo);       
+     public void Mostrar10HerramientasAlquiladas(JTable tabla,JDateChooser fechaDesde, 
+             JDateChooser fechaHasta,JLabel jLabel_descripcion){ 
+         
+        sdf1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        ff1 = sdf1.format(fechaDesde.getDate());
         
+        sdf2  = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        ff2 = sdf2.format(fechaHasta.getDate());
+        
+        
+        String titulos[]={"Cod producto", "Nombre", "Año fabric.","Fech adquisión", "Peso","Precio alquiler", "Nro. alquileres", "Estado","Ingreso generado"};
+        
+        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
+        tabla.setModel(modelo);    
+
         int numeracion=0;   
         try {
          this.obtenerconexion(); 
-        String query = "SELECT a.ID, a.fecHoraCreacion, h.ID, h.nombre, h.imp_PrecioAlquiler, SUM(a.imp_Total) AS total_ingreso, c.nombrecompleto, a.estado " +
-                 "FROM alquiler a " +
-                 "INNER JOIN detallesalquiler da ON a.ID = da.ID " +
-                 "INNER JOIN herramienta h ON h.ID = da.idHerramienta " +
-                 "INNER JOIN cliente c ON c.ID = a.idCliente " +
-                 "GROUP BY a.ID " +
-                 "ORDER BY total_ingreso DESC " +
-                 "LIMIT 10;";
-         
-        ps = conexion.prepareStatement(query);
-        rs = ps.executeQuery();
+        String query = "SELECT dv.idHerramienta,h.nombre,h.anioFabricacion,h.fecAdquisicion,h.peso,h.imp_PrecioAlquiler,h.nroAlquileres,h.estado, SUM(dv.imp_montofinal) AS ingresos_generados\n" +
+                        "FROM detallesalquiler dv\n" +
+                        "JOIN alquiler v ON dv.idAlquiler = v.ID\n" +
+                        "inner join herramienta h on dv.idHerramienta = h.ID\n" +
+                        "where v.fecHoraCreacion between ? and ?\n" +
+                        "GROUP BY  dv.idHerramienta\n" +
+                        "ORDER BY ingresos_generados DESC\n" +
+                        "LIMIT 10;\n" +
+                        "             ";   
+        
+            ps = conexion.prepareStatement(query);
+            ps.setString(1,ff1);         
+            ps.setString(2, ff2);
+            rs = ps.executeQuery();
             
         while(rs.next()){
-            numeracion++;
-            System.out.println("perro"+rs);
-            Reporte re = new Reporte();  
-            re.setCodAlquiler(rs.getInt("ID"));
-            re.setFechaCreacion(rs.getDate("fecHoraCreacion"));
-            re.setCodHerramienta(rs.getInt("ID"));
-            re.setNombreHerramienta(rs.getString("nombre"));
-            re.setPrecioAlquiler(rs.getDouble("imp_PrecioAlquiler"));
-            re.setNombreCliente(rs.getString("nombrecompleto"));
-            re.setImporteTotal(rs.getDouble("total_ingreso")); // Corregido para utilizar el alias total_ingreso
-            re.setEstado(rs.getString("estado"));     
+            numeracion++;            
+            Herramienta her = new Herramienta();       
+            
+            her.setID(rs.getInt("idHerramienta"));         
+            her.setNombre(rs.getString("nombre"));          
+            her.setAnioFabricacion(rs.getInt("anioFabricacion"));
+            her.setFecAdquisicion(LocalDate.parse(rs.getString("fecAdquisicion")));
+            her.setPeso(rs.getDouble("peso"));  
+            her.setImp_PrecioAlquiler(rs.getDouble("imp_PrecioAlquiler"));
+            her.setNroAlquileres(rs.getInt("nroAlquileres"));
+            her.setEstado(rs.getString("estado"));
+            her.setImporteFinal(rs.getDouble("ingresos_generados"));
              
-            modelo.addRow(re.RegistroReporte(numeracion));   
-        }     
+            modelo.addRow(her.Reporte10Herramienta(numeracion)); 
+        } 
+         jLabel_descripcion.setText("Lista de las 10 herramientas que mas ingreso generaron");
         
         ManejadorTablas.FormatoTablaClientes(tabla);
         
@@ -132,38 +155,41 @@ public class CRUDreportes extends ConectarBD {
      }
      
 
-    public void MostrarHerramientasNuncaSeVendio(JTable tabla){
-        String titulos[] = {"ID", "Serie", "Nombre", "Tipo", "Valor Referencial", "Año fabric.", "Peso", "Precio", "Nro. alquileres", "Estado"};
+    public void MostrarHerramientasNuncaSeAlquilo(JTable tabla,JDateChooser fechaDesde, 
+             JDateChooser fechaHasta, JLabel jLabel_descripcion){
+        
+        sdf1 = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        ff1 = sdf1.format(fechaDesde.getDate());
+        
+        sdf2  = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        ff2 = sdf2.format(fechaHasta.getDate());
+        
+        String titulos[]={"Cod producto", "Nombre", "Año fabric.","Fech adquisión", "Peso","precio de alquiler", "Nro. alquileres", "Estado"};
         DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-        tabla.setModel(modelo);  
+        tabla.setModel(modelo);   
         
         int numeracion = 0;
         
         try {
-            this.obtenerconexion();            
-            String query = "SELECT \n" +
-            "    h.ID,\n" +
-            "    h.nroSerie,\n" +
-            "    h.nombre,\n" +
-            "    h.idTipo,\n" +
-            "    h.imp_ValorReferencial,\n" +
-            "    h.anioFabricacion,\n" +
-            "    h.peso,\n" +
-            "    h.imp_PrecioAlquiler,\n" +
-            "    h.fecAdquisicion,\n" +
-            "    h.nroAlquileres,\n" +
-            "    h.estado\n" +
-            "FROM\n" +
-            "    herramienta h\n" +
-            "WHERE\n" +
-            "    h.ID NOT IN (SELECT DISTINCT\n" +
-            "            da.idHerramienta\n" +
-            "        FROM\n" +
-            "            alquiler a\n" +
-            "                INNER JOIN\n" +
-            "            detallesalquiler da ON a.ID = da.ID);";
+            this.obtenerconexion();  
             
-            ps = conexion.prepareStatement(query);           
+            String query = "SELECT \n" +
+"            h.ID,       \n" +
+"            h.nombre,   \n" +
+"            h.anioFabricacion, \n" +
+"            h.fecAdquisicion,\n" +
+"            h.peso,\n" +
+"            h.imp_PrecioAlquiler, \n" +
+"            h.nroAlquileres,\n" +  
+"            h.estado\n" +
+"            FROM\n" +
+"            herramienta h\n" +
+"            WHERE\n" +
+"           h.nroAlquileres = 0 and h.fecAdquisicion between ?  and ? ;";
+            
+            ps = conexion.prepareStatement(query);
+            ps.setString(1,ff1);         
+            ps.setString(2, ff2);
             rs = ps.executeQuery();
             
         while(rs.next()){
@@ -171,25 +197,20 @@ public class CRUDreportes extends ConectarBD {
             numeracion++;
             Herramienta her = new Herramienta();
             
-            her.setID(rs.getInt(1));
-            her.setNroSerie(rs.getString(2));
-            her.setNombre(rs.getString(3));
-            her.setIdTipo(rs.getInt(4));
-            her.setImp_ValorReferencial(rs.getDouble(5));
-            her.setAnioFabricacion(rs.getInt(6));
-            her.setPeso(rs.getDouble(7));
-            her.setImp_PrecioAlquiler(rs.getDouble(8));
-            her.setFecAdquisicion(LocalDate.parse(rs.getString(9)));
-            her.setNroAlquileres(rs.getInt(10));
-            her.setEstado(rs.getString(11));
+             her.setID(rs.getInt(1));         
+            her.setNombre(rs.getString(2));          
+            her.setAnioFabricacion(rs.getInt(3));
+            her.setFecAdquisicion(LocalDate.parse(rs.getString(4)));
+            her.setPeso(rs.getDouble(5));  
+            her.setImp_PrecioAlquiler(rs.getDouble(6));
+            her.setNroAlquileres(rs.getInt(7));
+            her.setEstado(rs.getString(8)); 
             
-            CRUDtipos crudt = new CRUDtipos();
-            TipoHerramienta tp = crudt.ConsultarTipoPorId(her.getIdTipo());
-            her.setTipo(tp);
             
-            modelo.addRow(her.RegistroHerramientaAlquiler(numeracion));
+            modelo.addRow(her.ReporteHerramientaNucaAlquiladas(numeracion));
 
         }
+         jLabel_descripcion.setText("Lista de herramientas que nunca se alquilaron");
          ManejadorTablas.FormatoTablaHerramientas(tabla);
     }catch (SQLException ex) {
             Mensajes.M1("Error! No se puedes mostrar los registros del reporte" + ex);
