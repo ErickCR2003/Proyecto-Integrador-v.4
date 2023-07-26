@@ -6,12 +6,14 @@ import Formatos.Mensajes;
 import Principal.Main;
 import Vst.Alquiler.VstAlquiler_Lista;
 import Vst.Alquiler.VstAlquiler_Devolver;
+import Vst.Caja.VstCaja;
 import Vst.Cliente.VstCliente_Lista;
 import Vst.Herramienta.VstHerramienta_Lista;
 import Vst.Reporte.VstReportes;
 import Vst.VstMenuPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import Vst.Mantenimiento.VstMantenimiento_Lista;
 
 
 public class CtrlMenuPrincipal implements ActionListener {
@@ -37,9 +39,18 @@ public class CtrlMenuPrincipal implements ActionListener {
     public static CtrlCliente_Lista CCliente_Lista = new CtrlCliente_Lista(VCliente_Lista);   
     
     //--- Reporte --------------------------------------------------------------
-   public static Vst.Reporte.VstReportes VReportes = new VstReportes();
-   public static CtrlReporte CReportes = new CtrlReporte(VReportes); 
+    public static Vst.Reporte.VstReportes VReportes = new VstReportes();
+    public static CtrlReporte CReportes = new CtrlReporte(VReportes); 
+    
+    
+    //--- Caja --------------------------------------------------------------
+    public static Vst.Caja.VstCaja VCaja = new VstCaja();
+    public static CtrlCaja CCaja = new CtrlCaja(VCaja); 
             
+      //--- Mantenimiento ------------------------------------------------------------------------------
+    public static Vst.Mantenimiento.VstMantenimiento_Lista VMantenimiento_Lista = new VstMantenimiento_Lista();
+    public static CtrlMantenimiento_Lista CMantenimiento = new CtrlMantenimiento_Lista(VMantenimiento_Lista);
+    
     //--- Recibos -----------------------------------------------------------------------------------------
 //    public static Vst.Recibo.VstAdminHistoFac VHistoFac;
 //    public static Controlador_Administrar_Factura_Cliente CHistoFac;
@@ -66,8 +77,10 @@ public class CtrlMenuPrincipal implements ActionListener {
         VstMenuPrin.BtnClientes.addActionListener(this);
         VstMenuPrin.BtnTipoHerr.addActionListener(this);       
         VstMenuPrin.BtnHistorialFact.addActionListener(this);
-        VstMenuPrin.BtnReportes.addActionListener(this);
-        VstMenuPrin.BtnEmpleados.addActionListener(this);
+        VstMenuPrin.BtnCaja.addActionListener(this);        
+        VstMenuPrin.BtnReporte.addActionListener(this);
+        VstMenuPrin.BtnEmpleados.addActionListener(this);    
+        VstMenuPrin.BtnMantenimiento.addActionListener(this);
         VstMenuPrin.BtnCerrarSesion.addActionListener(this);
 
         //inicia con alquiler
@@ -110,12 +123,24 @@ public class CtrlMenuPrincipal implements ActionListener {
             VstMenuPrin.jdesktoppnlContenedor.add(VCliente_Lista);
         }  
         
+        //Caja
+        if (e.getSource() == VstMenuPrin.BtnCaja) {
+            VstMenuPrin.jdesktoppnlContenedor.removeAll();           
+            VstMenuPrin.jdesktoppnlContenedor.add(VCaja);
+            CCaja.CargarMovimientosDiaAct();
+        }  
+        
         //Reporte
-        if (e.getSource() == VstMenuPrin.BtnReportes) {
+        if (e.getSource() == VstMenuPrin.BtnReporte) {
             VstMenuPrin.jdesktoppnlContenedor.removeAll();           
             VstMenuPrin.jdesktoppnlContenedor.add(VReportes);
         }  
         
+        //Mantenimiento
+        if (e.getSource() == VstMenuPrin.BtnMantenimiento) {
+            VstMenuPrin.jdesktoppnlContenedor.removeAll();           
+            VstMenuPrin.jdesktoppnlContenedor.add(VMantenimiento_Lista);
+        }       
         
         // Cerrar sesión
          if (e.getSource() == VstMenuPrin.BtnCerrarSesion) {

@@ -46,4 +46,10 @@ public class ManejadorTablas {
         }       
     }
     
+     public static void FormatoTablaMantenimiento(JTable tabla){
+        for (int i = 0; i < 7; i++) {
+            JustificarCelda(tabla, i);
+        }       
+    }
+    
 }

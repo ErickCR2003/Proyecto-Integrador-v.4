@@ -224,7 +224,7 @@ public class VstAlquiler extends javax.swing.JFrame {
 
         jbtnBuscarHerramienta.setBackground(new java.awt.Color(27, 23, 51));
         jbtnBuscarHerramienta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscar 24x24.png"))); // NOI18N
-        jPanel3.add(jbtnBuscarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 20, 50, 40));
+        jPanel3.add(jbtnBuscarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, 50, 40));
 
         jbtnCancelarCom.setBackground(new java.awt.Color(255, 51, 51));
         jbtnCancelarCom.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
@@ -233,6 +233,7 @@ public class VstAlquiler extends javax.swing.JFrame {
 
         jbtnAgregarCliente.setBackground(new java.awt.Color(153, 0, 102));
         jbtnAgregarCliente.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jbtnAgregarCliente.setForeground(new java.awt.Color(255, 255, 255));
         jbtnAgregarCliente.setText("AGREGAR CLIENTE");
         jPanel3.add(jbtnAgregarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 280, 160, 50));
 
@@ -247,13 +248,14 @@ public class VstAlquiler extends javax.swing.JFrame {
         jPanel3.add(jcbxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 20, 160, 50));
 
         btnActualizaTipos.setBackground(new java.awt.Color(13, 101, 5));
+        btnActualizaTipos.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizaTipos.setText("ACTUALIZAR TIPOS");
         btnActualizaTipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizaTiposActionPerformed(evt);
             }
         });
-        jPanel3.add(btnActualizaTipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 140, 40));
+        jPanel3.add(btnActualizaTipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 160, 40));
 
         jcbxTraslado.setBackground(new java.awt.Color(217, 217, 217));
         jcbxTraslado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "SI", "NO" }));
@@ -267,14 +269,14 @@ public class VstAlquiler extends javax.swing.JFrame {
         jPanel3.add(jspnPrecioTraslado, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, 170, 50));
 
         jbtnlimpiar.setBackground(new java.awt.Color(13, 101, 5));
+        jbtnlimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnlimpiar.setText("LIMPIAR FILTROS");
-        jbtnlimpiar.setActionCommand("LIMPIAR FILTROS");
         jbtnlimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtnlimpiarActionPerformed(evt);
             }
         });
-        jPanel3.add(jbtnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 130, 40));
+        jPanel3.add(jbtnlimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 20, 150, 40));
 
         lblNroHerram.setText(" ");
         jPanel3.add(lblNroHerram, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, -1, 20));

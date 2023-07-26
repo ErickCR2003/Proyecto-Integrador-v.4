@@ -1,18 +1,18 @@
 package Modelo;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Alquiler {
 
     private int ID;
     private LocalDate fecHoraCreacion;
     private int diasAlquiler;
-    private LocalDateTime fecHoraSalida;
-    private LocalDateTime fecHoraRetorno;
-    private double imp_Total;
+    private LocalDate fecHoraSalida;
+    private LocalDate fecHoraRetorno;
+    private double imp_Alquiler;
     private double imp_Garantia;
     private double imp_Traslado;
+    private double imp_Total;
     private String estado;
     private boolean conTraslado;
     private String direccionEntrega;
@@ -69,19 +69,19 @@ public class Alquiler {
         this.diasAlquiler = diasAlquiler;
     }
 
-    public LocalDateTime getFecHoraSalida() {
+    public LocalDate getFecHoraSalida() {
         return fecHoraSalida;
     }
 
-    public void setFecHoraSalida(LocalDateTime fecHoraSalida) {
+    public void setFecHoraSalida(LocalDate fecHoraSalida) {
         this.fecHoraSalida = fecHoraSalida;
     }
 
-    public LocalDateTime getFecHoraRetorno() {
+    public LocalDate getFecHoraRetorno() {
         return fecHoraRetorno;
     }
 
-    public void setFecHoraRetorno(LocalDateTime fecHoraRetorno) {
+    public void setFecHoraRetorno(LocalDate fecHoraRetorno) {
         this.fecHoraRetorno = fecHoraRetorno;
     }
 
@@ -107,6 +107,14 @@ public class Alquiler {
 
     public void setImp_Traslado(double imp_Traslado) {
         this.imp_Traslado = imp_Traslado;
+    }
+    
+    public double getImp_Alquiler() {
+        return imp_Alquiler;
+    }
+
+    public void setImp_Alquiler(double imp_Alquiler) {
+        this.imp_Alquiler = imp_Alquiler;
     }
 
     public int getIdEmpleado() {

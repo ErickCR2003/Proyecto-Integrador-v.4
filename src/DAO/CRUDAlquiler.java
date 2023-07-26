@@ -2,10 +2,8 @@ package DAO;
 
 import Formatos.Mensajes;
 import Modelo.Cliente;
-import Modelo.Empleado;
 import Modelo.Alquiler;
 import Modelo.Herramienta;
-import Modelo.TipoHerramienta;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
@@ -27,19 +25,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.print.Doc;
-import javax.print.DocFlavor;
-import javax.print.DocPrintJob;
-import javax.print.PrintService;
-import javax.print.PrintServiceLookup;
-import javax.print.SimpleDoc;
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -54,191 +41,11 @@ public class CRUDAlquiler extends ConectarBD {
     public CRUDAlquiler() {
     }
 
-//    public void MostrarFacturasClienteDNI(JTable tabla, String dni) {
-//        String titulos[] = {"Nro° Factura", "Fecha Emision", "Empleado Responsable", "Subtotal", "Descuento", 
-//                            "Costo Delivery","Cantidad", "Monto Final"};
-//        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-//        tabla.setModel(modelo);
-//
-//        try {
-//            this.obtenerconexion();
-//            rs = st.executeQuery("SELECT facturas.idfactura, facturas.fecha, facturas.idempleado, facturas.iddetalles FROM facturas\n"
-//                    + "JOIN detalles ON facturas.iddetalles = detalles.iddetalles\n"
-//                    + "JOIN cliente ON facturas.idcliente = cliente.idcliente\n"
-//                    + "JOIN empleado ON facturas.idempleado = empleado.idempleado\n"
-//                    + "WHERE cliente.tipoIdentificacion = 'DNI' AND cliente.numeroIdentifacion = '"+dni+"'");
-//            while (rs.next()) {
-//                Factura fact = new Factura();
-//                fact.setIdfactura(rs.getInt(1));
-//                fact.setFecha(LocalDate.parse(rs.getString(2)));
-//                fact.setIdempleado(rs.getInt(3));
-//                fact.setIddetalles(rs.getInt(4));
-//
-//                CRUDempleados crude = new CRUDempleados();
-//                Empleado datosemp = crude.ConsultarRegistroEmpByID(fact.getIdempleado());
-//                fact.setEmpleado(datosemp);
-//
-//                CRUDdetalles crudd = new CRUDdetalles();
-//                Detalles datosdet = crudd.ConsultarRegistroDet(fact.getIddetalles());
-//                fact.setDetalles(datosdet);
-//                                
-//                modelo.addRow(fact.RegistroFactura());
-//            } //Fin del while
-//
-//        } catch (Exception ex) {
-//            Mensajes.M1("ERROR!" + ex);
-//        } finally {
-//            this.cerrarconexion();
-//        }
-//    }
-
-//    public void MostrarFacturasEmpresaRUC(JTable tabla, String ruc) {
-//        String titulos[] = {"Nro° Factura", "Fecha Emision", "Empleado Responsable", "Subtotal", "Descuento", 
-//                            "Costo Delivery","Cantidad", "Monto Final"};
-//        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-//        tabla.setModel(modelo);
-//
-//        try {
-//            this.obtenerconexion();
-//            rs = st.executeQuery("SELECT facturas.idfactura, facturas.fecha, facturas.idempleado, facturas.iddetalles FROM facturas\n"
-//                    + "JOIN detalles ON facturas.iddetalles = detalles.iddetalles\n"
-//                    + "JOIN cliente ON facturas.idcliente = cliente.idcliente\n"
-//                    + "JOIN empleado ON facturas.idempleado = empleado.idempleado\n"
-//                    + "WHERE cliente.tipoIdentificacion = 'RUC' AND cliente.numeroIdentifacion = '"+ruc+"'");
-//            while (rs.next()) {
-//                Factura fact = new Factura();
-//                fact.setIdfactura(rs.getInt(1));
-//                fact.setFecha(LocalDate.parse(rs.getString(2)));
-//                fact.setIdempleado(rs.getInt(3));
-//                fact.setIddetalles(rs.getInt(4));
-//
-//                CRUDempleados crude = new CRUDempleados();
-//                Empleado datosemp = crude.ConsultarRegistroEmpByID(fact.getIdempleado());
-//                fact.setEmpleado(datosemp);
-//
-//                CRUDdetalles crudd = new CRUDdetalles();
-//                Detalles datosdet = crudd.ConsultarRegistroDet(fact.getIddetalles());
-//                fact.setDetalles(datosdet);
-//                                
-//                modelo.addRow(fact.RegistroFactura());
-//            } //Fin del while
-//
-//        } catch (Exception ex) {
-//            Mensajes.M1("ERROR! No se pueden mostrar los registros de la tabla Vuelos en proceso..." + ex);
-//        } finally {
-//            this.cerrarconexion();
-//        }
-//    }
-
-//    public void MostrarFacturasPorFechaEspecifica(JTable tabla, String fechaEspecifica) {
-//        String titulos[] = {"Nro° Factura", "Fecha Emision", "Empleado Responsable", "Subtotal", "Descuento", 
-//                            "Costo Delivery","Cantidad", "Monto Final"};
-//        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-//        tabla.setModel(modelo);
-//
-//        try {
-//            this.obtenerconexion();
-//            rs = st.executeQuery("SELECT * FROM facturas WHERE fecha = '"+fechaEspecifica+"'");
-//            while (rs.next()) {
-//                Factura fact = new Factura();
-//                fact.setIdfactura(rs.getInt(1));
-//                fact.setFecha(LocalDate.parse(rs.getString(2)));
-//                fact.setIdempleado(rs.getInt(3));
-//                fact.setIddetalles(rs.getInt(4));
-//
-//                CRUDempleados crude = new CRUDempleados();
-//                Empleado datosemp = crude.ConsultarRegistroEmpByID(fact.getIdempleado());
-//                fact.setEmpleado(datosemp);
-//
-//                CRUDdetalles crudd = new CRUDdetalles();
-//                Detalles datosdet = crudd.ConsultarRegistroDet(fact.getIddetalles());
-//                fact.setDetalles(datosdet);
-//                                
-//                modelo.addRow(fact.RegistroFactura());
-//            } //Fin del while
-//
-//        } catch (Exception ex) {
-//            Mensajes.M1("ERROR! No se pueden mostrar los registros de la tabla Vuelos en proceso..." + ex);
-//        } finally {
-//            this.cerrarconexion();
-//        }
-//    }
-    
-//    public void MostrarFacturasPorFechaRango(JTable tabla, String fechaInicio, String fechaFin) {
-//        String titulos[] = {"Nro° Factura", "Fecha Emision", "Empleado Responsable", "Subtotal", "Descuento", 
-//                            "Costo Delivery","Cantidad", "Monto Final"};
-//        DefaultTableModel modelo = new DefaultTableModel(null, titulos);
-//        tabla.setModel(modelo);
-//
-//        try {
-//            this.obtenerconexion();
-//            rs = st.executeQuery("SELECT * FROM facturas WHERE fecha BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"'");
-//            while (rs.next()) {
-//                Factura fact = new Factura();
-//                fact.setIdfactura(rs.getInt(1));
-//                fact.setFecha(LocalDate.parse(rs.getString(2)));
-//                fact.setIdempleado(rs.getInt(3));
-//                fact.setIddetalles(rs.getInt(4));
-//
-//                CRUDempleados crude = new CRUDempleados();
-//                Empleado datosemp = crude.ConsultarRegistroEmpByID(fact.getIdempleado());
-//                fact.setEmpleado(datosemp);
-//
-//                CRUDdetalles crudd = new CRUDdetalles();
-//                Detalles datosdet = crudd.ConsultarRegistroDet(fact.getIddetalles());
-//                fact.setDetalles(datosdet);
-//                                
-//                modelo.addRow(fact.RegistroFactura());
-//            } //Fin del while
-//
-//        } catch (Exception ex) {
-//            Mensajes.M1("ERROR! No se pueden mostrar los registros de la tabla Vuelos en proceso..." + ex);
-//        } finally {
-//            this.cerrarconexion();
-//        }
-//    }
-//    
-//    public void ConsultarTotalGanadoEnElDia(String fechaEspecifica, JLabel etiqueta) {
-//        double totalganado = 0; //Vacio
-//        try {
-//            this.obtenerconexion();
-//            rs = st.executeQuery("SELECT SUM(montofinal) FROM detalles\n" +
-//                                 "JOIN facturas ON detalles.iddetalles = facturas.iddetalles WHERE fecha = '" + fechaEspecifica + "'");
-//            if (rs.next()) {//Si tiene registro la consulta
-//                totalganado = rs.getDouble(1);
-//            }
-//            etiqueta.setText("Ingreso del Dia:  S/." + totalganado);
-//            //conexion.close();
-//        } catch (Exception ex) {
-//            Mensajes.M1("ERROR!..." + ex);
-//        } finally {
-//            this.cerrarconexion();
-//        } 
-//    }
-//    
-//    public void ConsultarTotalGanadoEnRango(String fechaInicio, String fechaFin, JLabel etiqueta) {
-//        double totalganado = 0; //Vacio
-//        try {
-//            this.obtenerconexion();
-//            rs = st.executeQuery("SELECT SUM(montofinal) FROM detalles\n" +
-//                                 "JOIN facturas ON detalles.iddetalles = facturas.iddetalles WHERE fecha BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"'");
-//            if (rs.next()) {//Si tiene registro la consulta
-//                totalganado = rs.getDouble(1);
-//            }
-//            etiqueta.setText("Ingreso Total:  S/." + totalganado);
-//            //conexion.close();
-//        } catch (Exception ex) {
-//            Mensajes.M1("ERROR!..." + ex);
-//        } finally {
-//            this.cerrarconexion();
-//        } 
-//    }
-
     public int ConsultarCantidadDeFacturas() {
         int cantidad = 0; //Vacio
         try {
             this.obtenerconexion();
-            rs = st.executeQuery("SELECT COUNT(*) FROM alquiler;");
+            rs = st.executeQuery("SELECT MAX(ID) FROM alquiler;");
             if (rs.next()) {//Si tiene registro la consulta
                 cantidad = rs.getInt(1);
             }
@@ -257,7 +64,8 @@ public class CRUDAlquiler extends ConectarBD {
             this.obtenerconexion();
             // preparedStatament permite especificar parametros en la consulta a traves del simbolo la interrogante (?)
             ps = conexion.prepareStatement("INSERT INTO alquiler (fecHoraCreacion, diasAlquiler, fecHoraSalida, fecHoraRetorno, imp_Total,"
-                    + "imp_Garantia,imp_Traslado,estado,conTraslado,direccionEntrega,SerieFacBol,NroFacBol,serieCorrFacBol,idEmpleado,idCliente) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
+                    + "imp_Garantia,imp_Traslado, imp_Alquiler , estado,conTraslado,direccionEntrega,SerieFacBol,NroFacBol,serieCorrFacBol,idEmpleado,idCliente) "
+                    + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
             ps.setObject(1, alq.getFecHoraCreacion());
             ps.setInt(2, alq.getDiasAlquiler());
             ps.setObject(3, alq.getFecHoraSalida());
@@ -265,14 +73,15 @@ public class CRUDAlquiler extends ConectarBD {
             ps.setDouble(5, alq.getImp_Total());
             ps.setDouble(6, alq.getImp_Garantia());
             ps.setDouble(7, alq.getImp_Traslado());
-            ps.setString(8, alq.getEstado());
-            ps.setBoolean(9, alq.isConTraslado());
-            ps.setString(10, alq.getDireccionEntrega());
-            ps.setString(11, alq.getSerieFacBol());
-            ps.setInt(12, alq.getNroFacBol());
-            ps.setString(13, alq.getSerieCorrFacBol());
-            ps.setInt(14, alq.getIdEmpleado());
-            ps.setInt(15, alq.getIdCliente());
+            ps.setDouble(8, alq.getImp_Alquiler());
+            ps.setString(9, alq.getEstado());
+            ps.setBoolean(10, alq.isConTraslado());
+            ps.setString(11, alq.getDireccionEntrega());
+            ps.setString(12, alq.getSerieFacBol());
+            ps.setInt(13, alq.getNroFacBol());
+            ps.setString(14, alq.getSerieCorrFacBol());
+            ps.setInt(15, alq.getIdEmpleado());
+            ps.setInt(16, alq.getIdCliente());
             ps.executeUpdate(); // actualiza y ejecuta la consulta
             
             Mensajes.M1("Datos registrados correctamente...");  
@@ -283,15 +92,29 @@ public class CRUDAlquiler extends ConectarBD {
         }
     }
     
+    public void MostrarAlquileresEnTablaSegunEstado(JTable tabla, JLabel etiqueta, String estado){
+            
+        String sqlQry = "SELECT ID, estado, NomCliente, TipoRucDniCli, RucDniCli, fecHoraSalida, fecHoraRetorno, SerieCorrFacBol, imp_Total, NomEmpleado "
+                + "FROM lst_alquileres "
+                + "WHERE estado = '" + estado + "'";
         
-      public void Alquiler_Lista(JTable tabla, JLabel etiqueta) {
+        if (estado == "-") {
+                sqlQry = "SELECT ID, estado, NomCliente, TipoRucDniCli, RucDniCli, fecHoraSalida, fecHoraRetorno, SerieCorrFacBol, imp_Total, NomEmpleado "
+                + "FROM lst_alquileres ";               
+        }       
+       
+        MostrarLista(tabla, etiqueta, sqlQry);
+    }
+     
+        
+    private void MostrarLista(JTable tabla, JLabel etiqueta, String XSQLQuery) {
         String titulos[] = {"ID", "Estado", "NomCliente", "Tipo Doc.", "Ruc/Dni", "Fecha Salida", "Fecha Retorno", "Factura", "Importe", "Empleado" };
         DefaultTableModel modelo = new DefaultTableModel(null, titulos);
         tabla.setModel(modelo);
         int numeracion = 0;
         try {
             this.obtenerconexion();
-            rs = st.executeQuery("SELECT ID, estado, NomCliente, TipoRucDniCli, RucDniCli, fecHoraSalida, fecHoraRetorno, SerieCorrFacBol, imp_Total, NomEmpleado FROM lst_alquileres;");
+            rs = st.executeQuery(XSQLQuery);
             while (rs.next()) {
                 numeracion++;
                 Object[] alq = new Object[]{
@@ -309,7 +132,7 @@ public class CRUDAlquiler extends ConectarBD {
                 modelo.addRow(alq); 
             } //Fin del while
             //conexion.close();
-            etiqueta.setText("Numero de registros : " + numeracion);
+            etiqueta.setText("Numero de registros: " + numeracion);
             } catch (Exception ex) {
                 Mensajes.M1("ERROR! No se pueden mostrar los registros de la tabla alquilerres..." + ex);
             } finally {
@@ -317,7 +140,32 @@ public class CRUDAlquiler extends ConectarBD {
             }
         }
     
-    
+    public void Alquiler_Devolver(int XIdAql) {
+    try {
+        this.obtenerconexion();            
+        String sql = "UPDATE alquiler SET estado = 'FINALIZADO' WHERE ID = ?";
+        ps = conexion.prepareStatement(sql);
+        ps.setInt(1, XIdAql); // Asignar el valor del parámetro XIdAql al PreparedStatement
+        ps.executeUpdate(); // actualiza y ejecuta la consulta
+        
+        
+        //liberando herramientas
+        String sqlh = "UPDATE herramienta AS H "
+                + "INNER JOIN detallesalquiler AS DA ON H.ID = DA.idHerramienta "
+                + "SET H.estado = 'DISPONIBLE', H.nroAlquileres = H.nroAlquileres + 1 "
+                + "WHERE DA.idAlquiler = ?";
+        ps = conexion.prepareStatement(sqlh);
+        ps.setInt(1, XIdAql); // Asignar el valor del parámetro XIdAql al PreparedStatement
+        ps.executeUpdate(); // actualiza y ejecuta la consulta
+        
+        Mensajes.M1("Datos registrados correctamente...");  
+    } catch (Exception ex) {
+        Mensajes.M1("ERROR! No se puede insertar el registro..." + ex);
+    } finally {
+        this.cerrarconexion();
+    }
+}
+        
     
     public int UltimoRegistroFactura() {
         int id = 0;
@@ -329,51 +177,19 @@ public class CRUDAlquiler extends ConectarBD {
             }
 
         } catch (Exception ex) {
-            Mensajes.M1("ERROR! No se pueden mostrar los registros de la tabla Vuelos en proceso..." + ex);
+            Mensajes.M1("ERROR! No se pueden mostrar los registros de la tabla alquileres..." + ex);
         } finally {
             this.cerrarconexion();
         }
         return id;
     }
+        
     
-//        public Factura UltimoRegistroFactura() {
-//        Factura fact = null;
-//        try {
-//            this.obtenerconexion();
-//            rs = st.executeQuery("SELECT * FROM facturas ORDER BY idfactura DESC LIMIT 1;");
-//            while (rs.next()) {
-//                fact = new Factura();
-//                fact.setIdfactura(rs.getInt(1));
-//                fact.setFecha(LocalDate.parse(rs.getString(2)));
-//                fact.setIdempleado(rs.getInt(3));
-//                fact.setIddetalles(rs.getInt(4));
-//                fact.setIdcliente(rs.getInt(5));
-//
-//                CRUDempleados crude = new CRUDempleados();
-//                Empleado datosemp = crude.ConsultarRegistroEmpByID(fact.getIdempleado());
-//                fact.setEmpleado(datosemp);
-//
-//                
-//                CRUDclientes crudc = new CRUDclientes();
-//                Cliente datoscli = crudc.ConsultarRegistroCliente_Recibo(fact.getIdcliente());
-//                fact.setCliente(datoscli);
-//                                            
-//            } //Fin del while
-//
-//        } catch (Exception ex) {
-//            Mensajes.M1("ERROR! No se pueden mostrar los registros de la tabla Vuelos en proceso..." + ex);
-//        } finally {
-//            this.cerrarconexion();
-//        }
-//        return fact;
-//    }
-    
-    
-     public Alquiler ConsultarRegistroAlquiler(int Xid) {
+    public Alquiler ConsultarRegistroAlquiler(int Xid) {
         Alquiler alq = null; //Vacio
         try {
             this.obtenerconexion();
-            rs = st.executeQuery("SELECT ID, fecHoraCreacion, diasAlquiler, fecHoraSalida, fecHoraRetorno, imp_Total, imp_Garantia, imp_Traslado, idEmpleado, idCliente, "
+            rs = st.executeQuery("SELECT ID, fecHoraCreacion, diasAlquiler, fecHoraSalida, fecHoraRetorno, imp_Total, imp_Garantia, imp_Traslado, imp_Alquiler, idEmpleado, idCliente, "
                     + " estado, conTraslado, direccionEntrega, SerieFacBol, NroFacBol, serieCorrFacBol FROM alquiler WHERE ID = " + Xid);
             if (rs.next()) {//Si tiene registro la consulta
                 alq = new Alquiler();
@@ -384,24 +200,25 @@ public class CRUDAlquiler extends ConectarBD {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 
                 String fechaHoraSal = rs.getString(4);
-                LocalDateTime fechaHoraSalida = LocalDateTime.parse(fechaHoraSal, formatter);                
+                LocalDate fechaHoraSalida = LocalDate.parse(fechaHoraSal, formatter);                
                 alq.setFecHoraSalida(fechaHoraSalida); 
                 
                 String fechaHoraRet = rs.getString(5);                
-                LocalDateTime fechaHoraRetorno = LocalDateTime.parse(fechaHoraRet, formatter);                
+                LocalDate fechaHoraRetorno = LocalDate.parse(fechaHoraRet, formatter);                
                 alq.setFecHoraRetorno(fechaHoraRetorno);    
                                
                 alq.setImp_Total(rs.getDouble(6));
                 alq.setImp_Garantia(rs.getDouble(7));
                 alq.setImp_Traslado(rs.getDouble(8));
-                alq.setIdEmpleado(rs.getInt(9));
-                alq.setIdCliente(rs.getInt(10));
-                alq.setEstado(rs.getString(11));
-                alq.setConTraslado(rs.getBoolean(12));
-                alq.setDireccionEntrega(rs.getString(13));
-                alq.setSerieFacBol(rs.getString(14));
-                alq.setNroFacBol(rs.getInt(15));
-                alq.setSerieCorrFacBol(rs.getString(16));
+                alq.setImp_Alquiler(rs.getDouble(9));
+                alq.setIdEmpleado(rs.getInt(10));
+                alq.setIdCliente(rs.getInt(11));
+                alq.setEstado(rs.getString(12));
+                alq.setConTraslado(rs.getBoolean(13));
+                alq.setDireccionEntrega(rs.getString(14));
+                alq.setSerieFacBol(rs.getString(15));
+                alq.setNroFacBol(rs.getInt(16));
+                alq.setSerieCorrFacBol(rs.getString(17));
                 
                 //convirtiendo los Id en objetos
                 Cliente cli = new Cliente();

@@ -77,6 +77,7 @@ public class VstCliente_Nvo extends javax.swing.JFrame {
 
         jbtnRegistrar.setBackground(new java.awt.Color(153, 0, 102));
         jbtnRegistrar.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jbtnRegistrar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnRegistrar.setText("Registrar");
         jbtnRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

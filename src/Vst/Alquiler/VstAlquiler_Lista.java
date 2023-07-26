@@ -19,6 +19,7 @@ public class VstAlquiler_Lista extends javax.swing.JInternalFrame {
         initComponents();
         
         //agregando opciones al combo de estado de alquiler
+         cmbEstadoAlquiler.addItem("-");
         cmbEstadoAlquiler.addItem("EN PROCESO");
         cmbEstadoAlquiler.addItem("FINALIZADO");
         cmbEstadoAlquiler.addItem("ANULADO");
@@ -86,12 +87,12 @@ public class VstAlquiler_Lista extends javax.swing.JInternalFrame {
         btnAlquiler_Nvo.setBackground(new java.awt.Color(102, 0, 51));
         btnAlquiler_Nvo.setForeground(new java.awt.Color(255, 255, 255));
         btnAlquiler_Nvo.setText("NUEVO ALQUILER");
-        jpnlPestañaAdministrarVuelos.add(btnAlquiler_Nvo, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 80, 150, 40));
+        jpnlPestañaAdministrarVuelos.add(btnAlquiler_Nvo, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 80, 150, 40));
 
         jbtnEditarHerramienta.setBackground(new java.awt.Color(102, 0, 51));
         jbtnEditarHerramienta.setForeground(new java.awt.Color(255, 255, 255));
         jbtnEditarHerramienta.setText("EDITAR");
-        jpnlPestañaAdministrarVuelos.add(jbtnEditarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 120, 40));
+        jpnlPestañaAdministrarVuelos.add(jbtnEditarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 80, 120, 40));
 
         tblAlquileres.setBackground(new java.awt.Color(217, 217, 217));
         tblAlquileres.setModel(new javax.swing.table.DefaultTableModel(
@@ -116,7 +117,7 @@ public class VstAlquiler_Lista extends javax.swing.JInternalFrame {
 
         btnAlquiler_Buscar.setBackground(new java.awt.Color(153, 0, 0));
         btnAlquiler_Buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscar 24x24.png"))); // NOI18N
-        jpnlPestañaAdministrarVuelos.add(btnAlquiler_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 80, 60, 40));
+        jpnlPestañaAdministrarVuelos.add(btnAlquiler_Buscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 60, 40));
 
         lblAlquiler_Nro.setBackground(new java.awt.Color(102, 0, 51));
         lblAlquiler_Nro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -126,7 +127,6 @@ public class VstAlquiler_Lista extends javax.swing.JInternalFrame {
         jpnlPestañaAdministrarVuelos.add(lblAlquiler_Nro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 695, 220, 40));
 
         cmbEstadoAlquiler.setBackground(new java.awt.Color(217, 217, 217));
-        cmbEstadoAlquiler.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
         jpnlPestañaAdministrarVuelos.add(cmbEstadoAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, 40));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -136,12 +136,12 @@ public class VstAlquiler_Lista extends javax.swing.JInternalFrame {
         btnAlquiler_Devolucion.setBackground(new java.awt.Color(102, 0, 51));
         btnAlquiler_Devolucion.setForeground(new java.awt.Color(255, 255, 255));
         btnAlquiler_Devolucion.setText("DEVOLUCION");
-        jpnlPestañaAdministrarVuelos.add(btnAlquiler_Devolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 130, 40));
+        jpnlPestañaAdministrarVuelos.add(btnAlquiler_Devolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, 130, 40));
 
         jbtnReiniciar.setBackground(new java.awt.Color(0, 102, 153));
         jbtnReiniciar.setForeground(new java.awt.Color(255, 255, 255));
-        jbtnReiniciar.setText("Actualizar");
-        jpnlPestañaAdministrarVuelos.add(jbtnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 80, 100, 40));
+        jbtnReiniciar.setText("Actualizar lista");
+        jpnlPestañaAdministrarVuelos.add(jbtnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 150, 40));
 
         getContentPane().add(jpnlPestañaAdministrarVuelos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 750));
 

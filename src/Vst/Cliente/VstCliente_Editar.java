@@ -88,6 +88,7 @@ public class VstCliente_Editar extends javax.swing.JFrame {
 
         jbtnActualizar.setBackground(new java.awt.Color(0, 102, 153));
         jbtnActualizar.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jbtnActualizar.setForeground(new java.awt.Color(255, 255, 255));
         jbtnActualizar.setText("Actualizar");
         jbtnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

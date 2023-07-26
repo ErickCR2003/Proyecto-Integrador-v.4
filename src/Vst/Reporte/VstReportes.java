@@ -83,7 +83,6 @@ public class VstReportes extends javax.swing.JInternalFrame {
         jTabbedPane2.setBackground(new java.awt.Color(27, 23, 51));
         jTabbedPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTabbedPane2.setForeground(new java.awt.Color(255, 255, 255));
-        jTabbedPane2.setEnabled(false);
 
         jPanel1.setBackground(new java.awt.Color(27, 23, 51));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());

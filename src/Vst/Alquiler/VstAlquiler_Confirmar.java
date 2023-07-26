@@ -31,6 +31,10 @@ public class VstAlquiler_Confirmar extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jtxaBorradorRecibo = new javax.swing.JTextArea();
         jbtnCancelarCompra = new javax.swing.JButton();
+        cmbTipoPago = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNroTransaccion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Borrador Alquiler");
@@ -41,9 +45,10 @@ public class VstAlquiler_Confirmar extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jbtnConfirmarCompra.setBackground(new java.awt.Color(13, 101, 5));
-        jbtnConfirmarCompra.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jbtnConfirmarCompra.setText("Confirmar Compra");
-        jPanel1.add(jbtnConfirmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 190, 40));
+        jbtnConfirmarCompra.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jbtnConfirmarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnConfirmarCompra.setText("Confirmar");
+        jPanel1.add(jbtnConfirmarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 440, 100, 40));
 
         jtxaBorradorRecibo.setEditable(false);
         jtxaBorradorRecibo.setBackground(new java.awt.Color(217, 217, 217));
@@ -55,14 +60,47 @@ public class VstAlquiler_Confirmar extends javax.swing.JFrame {
         jPanel1.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 500, 390));
 
         jbtnCancelarCompra.setBackground(new java.awt.Color(204, 0, 0));
-        jbtnCancelarCompra.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
-        jbtnCancelarCompra.setText("Cancelar Compra");
-        jPanel1.add(jbtnCancelarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 190, 40));
+        jbtnCancelarCompra.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jbtnCancelarCompra.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnCancelarCompra.setText("Cancelar");
+        jbtnCancelarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnCancelarCompraActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jbtnCancelarCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 90, 40));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 480));
+        cmbTipoPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Electrónico", " " }));
+        jPanel1.add(cmbTipoPago, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, 120, -1));
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Nro. Transacción:");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, -1, -1));
+
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Forma de pago:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, -1, -1));
+
+        txtNroTransaccion.setText("-");
+        txtNroTransaccion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNroTransaccionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtNroTransaccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, 120, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbtnCancelarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbtnCancelarCompraActionPerformed
+
+    private void txtNroTransaccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNroTransaccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNroTransaccionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -103,10 +141,14 @@ public class VstAlquiler_Confirmar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JComboBox<String> cmbTipoPago;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane5;
     public javax.swing.JButton jbtnCancelarCompra;
     public javax.swing.JButton jbtnConfirmarCompra;
     public javax.swing.JTextArea jtxaBorradorRecibo;
+    public javax.swing.JTextField txtNroTransaccion;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,11 +35,12 @@ public class CRUDherramientas extends ConectarBD {
             
         String sqlQry = "SELECT ID, nroSerie, nombre, idTipo, imp_ValorReferencial, anioFabricacion, peso, imp_PrecioAlquiler, fecAdquisicion, nroAlquileres, "
                 + " estado FROM herramienta WHERE idTipo = "+tipo;
-//        
-//        if (!"".equals(XTipo)) {
-//           sqlQry  += "AND TH.nombreTipo ='" + XTipo;
-//        }        
-//        
+        
+        if (tipo == 0) {
+             sqlQry = "SELECT ID, nroSerie, nombre, idTipo, imp_ValorReferencial, anioFabricacion, peso, imp_PrecioAlquiler, fecAdquisicion, nroAlquileres, "
+             + " estado FROM herramienta ";
+        }       
+       
         MostrarLista(tabla, etiqueta, sqlQry);
     }
     

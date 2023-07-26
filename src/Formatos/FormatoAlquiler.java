@@ -1,18 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Formatos;
 
 import Modelo.Alquiler;
 import Vst.Alquiler.VstAlquiler;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-/**
- *
- * @author admin
- */
+
 public class FormatoAlquiler {
 
     public static void LimpiarEntradas(VstAlquiler BV) {
@@ -28,8 +21,8 @@ public class FormatoAlquiler {
         BV.jspnPrecioTraslado.setValue(0);
     }
     
-    public static Alquiler LeerAlquiler(LocalDate fecHoraCreacion,int diasAlquiler,LocalDateTime fecHoraSalida,
-                        LocalDateTime fecHoraRetorno,double imp_Total,double imp_Garantia,double imp_Traslado,
+    public static Alquiler LeerAlquiler(LocalDate fecHoraCreacion,int diasAlquiler,LocalDate fecHoraSalida,
+                        LocalDate fecHoraRetorno,double imp_Total,double imp_Garantia,double imp_Traslado,double imp_Alquiler,
                         String estado, boolean conTraslado,String direccionEntrega,String serieFacBol, int NroFacBol,
                         String serieCorrFacBol,int idEmpleado,int idCliente){
         Alquiler alq = new Alquiler();
@@ -40,6 +33,7 @@ public class FormatoAlquiler {
         alq.setImp_Total(imp_Total);
         alq.setImp_Garantia(imp_Garantia);
         alq.setImp_Traslado(imp_Traslado);
+        alq.setImp_Alquiler(imp_Alquiler);
         alq.setEstado(estado);
         alq.setConTraslado(conTraslado);
         alq.setDireccionEntrega(direccionEntrega);

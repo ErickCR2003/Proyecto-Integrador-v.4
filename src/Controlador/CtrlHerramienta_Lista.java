@@ -6,6 +6,7 @@ import Modelo.Herramienta;
 import Vst.Herramienta.VstHerramienta_Lista;
 import Vst.Herramienta.VstHerramienta;
 import Vst.Herramienta.VstHerramienta;
+import Vst.Herramienta.VstHerramientaMantenimiento;
 import Vst.Herramienta.VstHerramienta_Editar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,6 +24,9 @@ public class CtrlHerramienta_Lista implements ActionListener {
 
     public static Vst.Herramienta.VstHerramienta_Editar VHerr_Editar;
     public static CtrlHerramienta_Editar CHerr_Editar;
+    
+    public static Vst.Herramienta.VstHerramientaMantenimiento VHerr_Mant;
+    public static CtrlHerramienta_Mantenimiento CHerr_Mant;
 
     public CtrlHerramienta_Lista(VstHerramienta_Lista AL) {
         vista_Lst = AL;
@@ -33,6 +37,7 @@ public class CtrlHerramienta_Lista implements ActionListener {
         vista_Lst.jbtnBuscarHerramienta.addActionListener(this);
         vista_Lst.jbtnInformacionHerramienta.addActionListener(this);
         vista_Lst.jbtnReiniciar.addActionListener(this);
+        vista_Lst.jbtnMantenimiento.addActionListener(this);
 
         crudh = new CRUDherramientas();
         crudh.MostrarHerramientasEnTabla(vista_Lst.jtblTablaDeHerramientas, vista_Lst.jlblNumeroDeHerramientas);
@@ -113,7 +118,22 @@ public class CtrlHerramienta_Lista implements ActionListener {
         }
         //-------------------------------------------------------------------------------------------------------------------------------------
         
-                
+        if (e.getSource() == vista_Lst.jbtnMantenimiento) {
+            if (idHerramientaEnTabla == 0) {
+                Mensajes.M1("Ninguna herramienta seleccionada.");
+            } else {
+                int id = idHerramientaEnTabla;
+                her = crudh.ConsultarRegistroHerramienta(id);
+                if (her == null) {
+                    Mensajes.M1("El ID " + id + " no existe en la tabla Herramientas.");
+                } else {
+                    VHerr_Mant = new VstHerramientaMantenimiento();
+                    CHerr_Mant = new CtrlHerramienta_Mantenimiento(VHerr_Mant, this);
+                }
+            }
+        }     
+        
+        
         
     }
 }

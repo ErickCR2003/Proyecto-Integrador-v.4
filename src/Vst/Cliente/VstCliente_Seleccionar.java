@@ -98,6 +98,7 @@ public class VstCliente_Seleccionar extends javax.swing.JFrame {
         jPanel1.add(jtpnclientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 590, 470));
 
         jbtnConfirmarCliente.setBackground(new java.awt.Color(13, 101, 5));
+        jbtnConfirmarCliente.setForeground(new java.awt.Color(255, 255, 255));
         jbtnConfirmarCliente.setText("CONFIRMAR");
         jPanel1.add(jbtnConfirmarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 560, 230, 30));
 

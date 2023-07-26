@@ -14,6 +14,7 @@ import Vst.Cliente.VstCliente_Seleccionar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -89,21 +90,24 @@ public class CtrlAlquiler_Nuevo implements ActionListener {
         //obtengo el valor del ID que está en la columna 0 de la fila
         idHerramientaEnTabla = (int) vista.jtblBusquedaHerramientasAlquiler.getValueAt(fila, 0);
 
-        boolean rpta = false;
+        boolean yaExiste = false;
 
         for (int i = 0; i < vista.jtblTablaVenta.getRowCount(); i++) {
             if (idHerramientaEnTabla == Integer.parseInt(vista.jtblTablaVenta.getValueAt(i, 0).toString())) {
-                rpta = true;
+                yaExiste = true;
             }
         }
 
-        if (rpta) {
+        if (yaExiste) {
             Mensajes.M1("Ya existe esta herramienta en el alquiler.");
         } else {
-            Mensajes.M3("Agregar al Alquiler", "¿Deseas agregar este producto al alquiler?");
-            DefaultTableModel modelo = (DefaultTableModel) vista.jtblTablaVenta.getModel();
-            her = crudh.ConsultarRegistroHerramienta(idHerramientaEnTabla);
-            modelo.addRow(her.RegistroHerramientasCarrito(her));
+            int respuestaUsuario = Mensajes.M3("Agregar al Alquiler", "¿Deseas agregar este producto al alquiler?");
+            if (respuestaUsuario == JOptionPane.YES_OPTION) {
+                //Mensajes.M3("Agregar al Alquiler", "¿Deseas agregar este producto al alquiler?");
+                DefaultTableModel modelo = (DefaultTableModel) vista.jtblTablaVenta.getModel();
+                her = crudh.ConsultarRegistroHerramienta(idHerramientaEnTabla);
+                modelo.addRow(her.RegistroHerramientasCarrito(her));                 
+            }
         }
     }
     //---------------------------------------------------------------------------------------------------------------------------
@@ -159,7 +163,7 @@ public class CtrlAlquiler_Nuevo implements ActionListener {
                     double acumulado = 0;
                     int CantidadFilas = vista.jtblTablaVenta.getRowCount();
                     for (int i = 0; i < CantidadFilas; i++) {
-                        acumulado += Double.parseDouble(vista.jtblTablaVenta.getValueAt(i, 8).toString());;
+                        acumulado += Double.parseDouble(vista.jtblTablaVenta.getValueAt(i, 8).toString());
                     }
                 }
             }
@@ -204,6 +208,8 @@ public class CtrlAlquiler_Nuevo implements ActionListener {
 //                } else {
                 VAlq_Confirmar = new VstAlquiler_Confirmar();
                 CtrlAlq_Confirmar = new CtrlAlquiler_Confirmar(VAlq_Confirmar, vista, VCliente_Selec);
+                
+                                
             }
         }
     }        

@@ -51,7 +51,7 @@ public class CtrlAlquiler_Lista implements ActionListener {
 
     private void CargarTablaAlquileres() {
         cruda = new CRUDAlquiler();
-        cruda.Alquiler_Lista(VstAlq_Lst.tblAlquileres, VstAlq_Lst.lblAlquiler_Nro);
+        cruda.MostrarAlquileresEnTablaSegunEstado(VstAlq_Lst.tblAlquileres, VstAlq_Lst.lblAlquiler_Nro, "-");
         VstAlq_Lst.setVisible(true);
     }
 
@@ -86,12 +86,15 @@ public class CtrlAlquiler_Lista implements ActionListener {
 
         // BUSCAR ------------------------------------------------------------------------------------------------
         if (e.getSource() == VstAlq_Lst.btnAlquiler_Buscar) {
-            if (VstAlq_Lst.cmbEstadoAlquiler.getSelectedItem().toString() == "-") {
-                Mensajes.M1("Ningun tipo seleccionado.");
-            } else {
-                String tipo = VstAlq_Lst.cmbEstadoAlquiler.getSelectedItem().toString();
-                //cruda.MostrarHerramientasEnTablaSegunElTipo(VstAlq_Lst.tblAlquileres, VstAlq_Lst.lblAlquiler_Nro, tipo);
-            }
+            String estado = VstAlq_Lst.cmbEstadoAlquiler.getSelectedItem().toString();
+            cruda.MostrarAlquileresEnTablaSegunEstado(VstAlq_Lst.tblAlquileres, VstAlq_Lst.lblAlquiler_Nro, estado);
+            
+//            if (VstAlq_Lst.cmbEstadoAlquiler.getSelectedItem().toString() == "-") {
+//                Mensajes.M1("Ningun tipo seleccionado.");
+//            } else {
+//                String estado = VstAlq_Lst.cmbEstadoAlquiler.getSelectedItem().toString();
+//                cruda.MostrarAlquileresEnTablaSegunEstado(VstAlq_Lst.tblAlquileres, estado);
+//            }
         }
         //--------------------------------------------------------------------------------------------------------
         
@@ -104,6 +107,12 @@ public class CtrlAlquiler_Lista implements ActionListener {
             if (alq == null) {
                 Mensajes.M1("El ID " + idAlquilerEnTabla + " no existe en la tabla alquileres.");
             } else {
+                
+                if ("FINALIZADO".equals(alq.getEstado())) {
+                    Mensajes.M1("El alquiler ya fue devuelto");
+                    return;
+                }                
+                
                 VAql_Dev = new VstAlquiler_Devolver();
                 CAlq_Dev = new CtrlAlquiler_Devolver(VAql_Dev); 
                 CAlq_Dev.CargarAlquiler(alq);

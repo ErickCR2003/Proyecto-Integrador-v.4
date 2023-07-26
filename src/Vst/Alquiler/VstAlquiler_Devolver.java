@@ -44,9 +44,8 @@ public class VstAlquiler_Devolver extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         txtImp_Transp = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtClienteCom = new javax.swing.JTextField();
+        txtIdAlquiler = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtImpDevol = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         txtFecDevol = new com.toedter.calendar.JDateChooser();
@@ -57,6 +56,7 @@ public class VstAlquiler_Devolver extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         txtFecRetiro = new com.toedter.calendar.JDateChooser();
         jLabel14 = new javax.swing.JLabel();
+        txtImpDevol = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Herramienta Nueva");
@@ -152,21 +152,13 @@ public class VstAlquiler_Devolver extends javax.swing.JFrame {
         jLabel8.setText("Fecha Devolución:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 130, 20));
 
-        txtClienteCom.setBackground(new java.awt.Color(217, 217, 217));
-        jPanel1.add(txtClienteCom, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 140, 40));
+        txtIdAlquiler.setBackground(new java.awt.Color(217, 217, 217));
+        jPanel1.add(txtIdAlquiler, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 140, 40));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Importe Devolución:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 330, 130, -1));
-
-        txtImpDevol.setBackground(new java.awt.Color(217, 217, 217));
-        txtImpDevol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtImpDevolActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtImpDevol, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 360, 140, 40));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 320, 130, -1));
 
         btnGuardar.setBackground(new java.awt.Color(51, 153, 255));
         btnGuardar.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
@@ -233,6 +225,9 @@ public class VstAlquiler_Devolver extends javax.swing.JFrame {
         jLabel14.setText("Fecha Retiro:");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 130, 20));
 
+        txtImpDevol.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel1.add(txtImpDevol, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 350, 140, 50));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 540));
 
         pack();
@@ -295,10 +290,6 @@ public class VstAlquiler_Devolver extends javax.swing.JFrame {
     private void txtFecRetiroMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFecRetiroMousePressed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtFecRetiroMousePressed
-
-    private void txtImpDevolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtImpDevolActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtImpDevolActionPerformed
 
     /**
      * @param args the command line arguments
@@ -385,10 +376,10 @@ public class VstAlquiler_Devolver extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     public javax.swing.JTextField txtAnioFabrica1;
-    public javax.swing.JTextField txtClienteCom;
     public com.toedter.calendar.JDateChooser txtFecDevol;
     public com.toedter.calendar.JDateChooser txtFecRetiro;
-    public javax.swing.JTextField txtImpDevol;
+    public javax.swing.JTextField txtIdAlquiler;
+    public javax.swing.JSpinner txtImpDevol;
     public javax.swing.JTextField txtImp_Alq;
     public javax.swing.JTextField txtImp_Garant;
     public javax.swing.JTextField txtImp_Transp;

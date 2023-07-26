@@ -40,6 +40,7 @@ public class VstHerramienta_Lista extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jbtnInformacionHerramienta = new javax.swing.JButton();
         jbtnReiniciar = new javax.swing.JButton();
+        jbtnMantenimiento = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(1121, 784));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -79,12 +80,12 @@ public class VstHerramienta_Lista extends javax.swing.JInternalFrame {
         jbtnAñadirHerramientaNueva.setBackground(new java.awt.Color(102, 0, 51));
         jbtnAñadirHerramientaNueva.setForeground(new java.awt.Color(255, 255, 255));
         jbtnAñadirHerramientaNueva.setText("Nueva Herrramienta ");
-        jpnlPestañaAdministrarVuelos.add(jbtnAñadirHerramientaNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, 40));
+        jpnlPestañaAdministrarVuelos.add(jbtnAñadirHerramientaNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 80, -1, 40));
 
         jbtnEditarHerramienta.setBackground(new java.awt.Color(102, 0, 51));
         jbtnEditarHerramienta.setForeground(new java.awt.Color(255, 255, 255));
         jbtnEditarHerramienta.setText("Editar");
-        jpnlPestañaAdministrarVuelos.add(jbtnEditarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 120, 40));
+        jpnlPestañaAdministrarVuelos.add(jbtnEditarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 120, 40));
 
         jtblTablaDeHerramientas.setBackground(new java.awt.Color(217, 217, 217));
         jtblTablaDeHerramientas.setModel(new javax.swing.table.DefaultTableModel(
@@ -109,7 +110,7 @@ public class VstHerramienta_Lista extends javax.swing.JInternalFrame {
 
         jbtnBuscarHerramienta.setBackground(new java.awt.Color(153, 0, 0));
         jbtnBuscarHerramienta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Buscar 24x24.png"))); // NOI18N
-        jpnlPestañaAdministrarVuelos.add(jbtnBuscarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 80, 60, 40));
+        jpnlPestañaAdministrarVuelos.add(jbtnBuscarHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 60, 40));
 
         jlblNumeroDeHerramientas.setBackground(new java.awt.Color(102, 0, 51));
         jlblNumeroDeHerramientas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -129,12 +130,17 @@ public class VstHerramienta_Lista extends javax.swing.JInternalFrame {
         jbtnInformacionHerramienta.setBackground(new java.awt.Color(102, 0, 51));
         jbtnInformacionHerramienta.setForeground(new java.awt.Color(255, 255, 255));
         jbtnInformacionHerramienta.setText("Info. Herramienta");
-        jpnlPestañaAdministrarVuelos.add(jbtnInformacionHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 200, 40));
+        jpnlPestañaAdministrarVuelos.add(jbtnInformacionHerramienta, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 80, 130, 40));
 
-        jbtnReiniciar.setBackground(new java.awt.Color(0, 102, 0));
+        jbtnReiniciar.setBackground(new java.awt.Color(0, 102, 153));
         jbtnReiniciar.setForeground(new java.awt.Color(255, 255, 255));
-        jbtnReiniciar.setText("Reload");
-        jpnlPestañaAdministrarVuelos.add(jbtnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 80, 80, 40));
+        jbtnReiniciar.setText("Actualizar lista");
+        jpnlPestañaAdministrarVuelos.add(jbtnReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, 140, 40));
+
+        jbtnMantenimiento.setBackground(new java.awt.Color(102, 0, 51));
+        jbtnMantenimiento.setForeground(new java.awt.Color(255, 255, 255));
+        jbtnMantenimiento.setText("MANTENIMIENTO");
+        jpnlPestañaAdministrarVuelos.add(jbtnMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 80, 130, 40));
 
         getContentPane().add(jpnlPestañaAdministrarVuelos, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 750));
 
@@ -156,6 +162,7 @@ public class VstHerramienta_Lista extends javax.swing.JInternalFrame {
     public javax.swing.JButton jbtnBuscarHerramienta;
     public javax.swing.JButton jbtnEditarHerramienta;
     public javax.swing.JButton jbtnInformacionHerramienta;
+    public javax.swing.JButton jbtnMantenimiento;
     public javax.swing.JButton jbtnReiniciar;
     public javax.swing.JComboBox<String> jcbxTipoHerramienta;
     public javax.swing.JLabel jlblNumeroDeHerramientas;

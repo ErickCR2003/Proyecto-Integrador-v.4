@@ -1,11 +1,11 @@
 package Modelo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Pago {
 
     private int ID;
-    private LocalDateTime fecHoraCreacion;
+    private LocalDate fecHoraCreacion;
     private double impTotal;
     private String formaDePago;
     private String nroTransaccion;
@@ -24,11 +24,11 @@ public class Pago {
         this.ID = ID;
     }
 
-    public LocalDateTime getFecHoraCreacion() {
+    public LocalDate getFecHoraCreacion() {
         return fecHoraCreacion;
     }
 
-    public void setFecHoraCreacion(LocalDateTime fecHoraCreacion) {
+    public void setFecHoraCreacion(LocalDate fecHoraCreacion) {
         this.fecHoraCreacion = fecHoraCreacion;
     }
 
